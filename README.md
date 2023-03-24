@@ -1,2 +1,2 @@
-# ci-jenkins-ansible-php-sonarqube...
+# ci-jenkins-ansible-php-sonarqube..
 
