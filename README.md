@@ -377,4 +377,125 @@ ansible_python_interpreter=/usr/bin/python
 ```
 
 ![parameters](assets/14.png)
+## **Note: Ensure that Ansible runs against the Dev environment successfully.**
+
+
+## **CI/CD PIPELINE FOR TODO APPLICATION**
+
+
+We already have tooling website as a part of deployment through Ansible. Here we will introduce another PHP application to add to the list of software products we are managing in our infrastructure. The good thing with this particular application is that it has unit tests, and it is an ideal application to show an end-to-end CI/CD pipeline for a particular application.
+
+
+* Our goal here is to deploy the application onto servers directly from Artifactory rather than from git. If you have not updated Ansible with an Artifactory role, simply use this guide to create an Ansible role for Artifactory (ignore the Nginx part). 
+
+
+
+## Phase 1 – Prepare Jenkins
+============================
+
+
+1. Fork the repository below into your GitHub account
+
+`https://github.com/darey-devops/php-todo.git`
+
+
+2. On you Jenkins server, install PHP, its dependencies and Composer tool (Feel free to do this manually at first, then update your Ansible accordingly later)
+
+```
+yum module reset php -y
+yum module enable php:remi-7.4 -y
+yum install -y php php-common php-mbstring php-opcache php-intl php-xml php-gd php-curl php-mysqlnd php-fpm php-json
+systemctl start php-fpm
+systemctl enable php-fpm
+```
+
+sudo apt install -y zip libapache2-mod-php phploc php-{xml,bcmath,bz2,intl,gd,mbstring,mysql,zip}
+
+
+3. Install Jenkins plugins
+
+* Plot plugin
+
+* Artifactory plugin
+
+4. Spin up another server that will host the jfrog artifactory 
+
+-open ports 8081 and 8082 on artifactory server
+
+![](assets/15.png)
+![jfrog homepage](assets/16.png)
+
+
+We will use plot plugin to display tests reports, and code coverage information.
+The Artifactory plugin will be used to easily upload code artifacts into an Artifactory server.
+
+5. In Jenkins UI configure Artifactory
+
+![Configure Artifactory](assets/17.png)
+
+
+## **Phase 2 – Integrate Artifactory repository with Jenkins**
+
+
+1. Create a dummy Jenkinsfile in the repository
+   
+2. Using Blue Ocean, create a multibranch Jenkins pipeline
+   
+3. On the database server, create database and user
+
+Install mysql client: `sudo apt install mysql -y`
+
+4. Login into the DB-server(mysql server) and set the the bind address to 0.0.0.0: sudo vi /etc/mysql/mysql.conf.d/mysqld.cnf
+
+5. Create database and user. NOTE: The task of setting the database is done by the MySQL ansible role
+
+```
+Create database homestead;
+CREATE USER 'homestead'@'%' IDENTIFIED BY 'sePret^i';
+GRANT ALL PRIVILEGES ON * . * TO 'homestead'@'%';
+```
+
+![create homestead database](assets/18.png)
+
+![database created](assets/24.png)
+
+1. Update the database connectivity requirements in the file .env.sample
+
+
+
+2. Update Jenkinsfile with proper pipeline configuration
+
+```
+pipeline {
+    agent any
+
+  stages {
+
+     stage("Initial cleanup") {
+          steps {
+            dir("${WORKSPACE}") {
+              deleteDir()
+            }
+          }
+        }
+
+    stage('Checkout SCM') {
+      steps {
+            git branch: 'main', url: 'https://github.com/darey-devops/php-todo.git'
+      }
+    }
+
+    stage('Prepare Dependencies') {
+      steps {
+             sh 'mv .env.sample .env'
+             sh 'composer install'
+             sh 'php artisan migrate'
+             sh 'php artisan db:seed'
+             sh 'php artisan key:generate'
+      }
+    }
+  }
+}
+```
+**When running we get an error. This is due to the fact that the Jenkins Server being the client server cant communicate with the DB server.**
 
