@@ -481,7 +481,7 @@ pipeline {
 
     stage('Checkout SCM') {
       steps {
-            git branch: 'main', url: 'https://github.com/darey-devops/php-todo.git'
+            git branch: 'main', url: 'https://github.com/Typhoenix/php-todo.git'
       }
     }
 
@@ -498,4 +498,8 @@ pipeline {
 }
 ```
 **When running we get an error. This is due to the fact that the Jenkins Server being the client server cant communicate with the DB server.**
+
+We need to install mysql client on the Jenkins server and configure it.
+
+![](assets/38.png)
 
