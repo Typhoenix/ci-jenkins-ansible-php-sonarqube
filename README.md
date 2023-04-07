@@ -617,4 +617,37 @@ stage ('Deploy to Dev Environment') {
 ![](assets/31.png)
 ![](assets/phpapp.png)
 
+## SONARQUBE INSTALLATION
+
+SONARQUBE INSTALLATION
+SonarQube is a tool that can be used to create quality gates for software projects, and the ultimate goal is to be able to ship only quality software code.
+
+Despite that DevOps CI/CD pipeline helps with fast software delivery, it is of the same importance to ensure the quality of such delivery. Hence, we will need SonarQube to set up Quality gates. In this project we will use predefined Quality Gates (also known as The Sonar Way). Software testers and developers would normally work with project leads and architects to create custom quality gates.
+
+- Setting Up SonarQube
+On the Ansible config management pipeline, execute the ansible playbook script to install sonarqube via a preconfigured sonarqube ansible role.
+
+![installing Sonarqube](assets/32.png)
+
+- Access SonarQube
+To access SonarQube using browser, type server’s IP address followed by port 9000
+http://server_IP:9000 OR http://localhost:9000
+Login to SonarQube with default administrator username and password – *admin*
+![](assets/33.png)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
