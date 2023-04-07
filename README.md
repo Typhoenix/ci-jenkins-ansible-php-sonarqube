@@ -502,4 +502,35 @@ pipeline {
 We need to install mysql client on the Jenkins server and configure it.
 
 ![](assets/38.png)
+![](assets/24.png)
+![](assets/25.png)
+
+Notice the Prepare Dependencies section • The required file by PHP is .env so we are renaming .env.sample to .env • Composer is used by PHP to install all the dependent libraries used by the application • php artisan uses the .env file to setup the required database objects – (After successful run of this step, login to the database, run show tables and you will see the tables being created for you)
+
+3. Update the Jenkinsfile to include Unit tests step
+
+``` 
+   stage('Execute Unit Tests') {
+      steps {
+             sh './vendor/bin/phpunit'
+      }
+```
+
+![](assets/26.png)
+
+## **Phase 3 –Code Quality Analysis
+This is one of the areas where developers, architects and many stakeholders are mostly interested in as far as product development is concerned. As a DevOps engineer, you also have a role to play. Especially when it comes to setting up the tools.
+For PHP the most commonly tool used for code quality analysis is phploc
+
+The data produced by phploc can be ploted onto graphs in Jenkins.
+Add the code analysis step in *Jenkinsfile*. The output of the data will be saved in *build/logs/phploc.csv file*.
+
+```stage('Code Analysis') {
+  steps {
+        sh 'phploc app/ --log-csv build/logs/phploc.csv'
+
+
+  }
+}
+```
 
