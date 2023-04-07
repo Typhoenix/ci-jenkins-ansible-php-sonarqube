@@ -635,6 +635,42 @@ http://server_IP:9000 OR http://localhost:9000
 Login to SonarQube with default administrator username and password – *admin*
 ![](assets/33.png)
 
+* Install SonarQube Scanner plugin
+
+![install sonarqube scanner]()
+
+
+* Navigate to configure system in Jenkins. Add SonarQube server: Manage Jenkins > Configure System
+
+![configure sonarqube on jenkins](assets/34.png)
+* To generate authentication token in SonarQube to to: User > My Account > Security > Generate Tokens
+
+![Token for sonarqube](assets/35.png)
+
+* Configure Quality Gate Jenkins Webhook in SonarQube – The URL should point to your Jenkins server <http://{JENKINS_HOST}/sonarqube-webhook/>
+![](assets/36.png)
+
+* Setup SonarQube scanner from Jenkins – Global Tool Configuration. Go to: Manage Jenkins > Global Tool Configuration
+![](assets/37.png)
+
+* Update Jenkins Pipeline to include SonarQube scanning and Quality Gate. Making sure to place it before the "package artifact stage" Below is the snippet for a Quality Gate stage in Jenkinsfile.
+
+```
+stage('SonarQube Quality Gate') {
+    environment {
+        scannerHome = tool 'SonarQubeScanner'
+    }
+    steps {
+        withSonarQubeEnv('sonarqube') {
+            sh "${scannerHome}/bin/sonar-scanner"
+        }
+
+    }
+}
+```
+>The above step will fail because we have not updated sonar-scanner.properties.
+
+
 
 
 
