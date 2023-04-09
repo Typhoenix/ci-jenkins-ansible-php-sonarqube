@@ -6,7 +6,7 @@
 
  
  
-## **Project Description:**
+## **Project Description:** 
 
 
 In this project, I will be setting up a CI/CD Pipeline for a PHP based application. The overall CI/CD process looks like the architecture above.
