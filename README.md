@@ -27,7 +27,7 @@ Will be making use of AWS virtual machines for this and will require 6 servers f
 **SonarQube server:** To be used for Code quality analysis. Select a t2.medium at least, Ubuntu 20.04 and Security group should be open to port 9000
 
 **Artifactory server:** To be used as the binary repository where the outcome of your build process is stored. Select a t2.medium at least and Security group should be open to port 8081
-
+ 
 **Database server:** To server as the databse server for the Todo application
 
 **Todo webserver:** To host the Todo web application.
