@@ -18,7 +18,7 @@ This project is architected in two major repositories with each repository conta
 * PHP-todo REPO : this repository contains jenkinsfile which is focused on processes which are application build specific such as building, linting, static code analysis, push to artifact repository etc.
 
 
-## **Pre-requisites**
+## **Pre-requisites** 
 
 Will be making use of AWS virtual machines for this and will require 6 servers for the project which includes: Nginx Server: This would act as the reverse proxy server to our site and tool.
 
