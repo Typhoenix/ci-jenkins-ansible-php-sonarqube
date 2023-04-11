@@ -60,7 +60,7 @@ ci inventory file
 <Artifact_repository-Private-IP-Address>
 ```
 
-dev Inventory file
+dev Inventory file 
 
 ```
 [tooling]
