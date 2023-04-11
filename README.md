@@ -1,5 +1,5 @@
 ## **EXPERIENCE CONTINUOUS INTEGRATION WITH JENKINS | ANSIBLE | ARTIFACTORY | SONARQUBE | PHP**  
-===============================================================    
+===============================================================     
 
  
 ![](assets/19.png)   
