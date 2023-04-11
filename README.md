@@ -13,7 +13,7 @@ In this project, I will be setting up a CI/CD Pipeline for a PHP based applicati
 
 This project is architected in two major repositories with each repository containing its own CI/CD pipeline written in a Jenkinsfile
 
-* ansible-config-mgt- REPO: this repository contains JenkinsFile which is responsible for setting up and configuring infrastructure required to carry out processes required for our application to run. It does this through the use of ansible roles. This repo is infrastructure specific
+* ansible-config-mgt-2 REPO: this repository contains JenkinsFile which is responsible for setting up and configuring infrastructure required to carry out processes required for our application to run. It does this through the use of ansible roles. This repo is infrastructure specific
   
 * PHP-todo REPO : this repository contains jenkinsfile which is focused on processes which are application build specific such as building, linting, static code analysis, push to artifact repository etc.
 
