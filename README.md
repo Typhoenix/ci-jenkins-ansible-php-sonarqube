@@ -27,7 +27,7 @@ Will be making use of AWS virtual machines for this and will require 6 servers f
 
 **Artifactory server:** To be used as the binary repository where the outcome of your build process is stored. Select a t2.medium at least and Security group should be open to port 8081
  
-**Database server:** To server as the database server for the Todo application
+**Database server:** To serve as the database server for the Todo application
 
 **Todo webserver:** To host the Todo web application.
 
