@@ -102,7 +102,7 @@ Now we go ahead and Add two more roles to ansible:
 1. SonarQube (Scroll down to the Sonarqube section to see instructions on how to set up and configure SonarQube manually)
 
 Why do we need SonarQube?
-SonarQube is an open-source platform developed by SonarSource for continuous inspection of code quality, it is used to perform automatic reviews with static analysis of code to detect bugs, code smells, and security vulnerabilities.
+SonarQube is an open-source platform developed by SonarSource for continuous inspection of code qual ity, it is used to perform automatic reviews with static analysis of code to detect bugs, code smells, and security vulnerabilities.
 
 2. Artifactory
 
